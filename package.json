@@ -1,0 +1,23 @@
+{
+  "name": "full-quiz-app",
+  "version": "1.0.0",
+  "description": "A full stack quiz app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seunbayo/full-quiz-app.git"
+  },
+  "author": "seunbayo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seunbayo/full-quiz-app/issues"
+  },
+  "homepage": "https://github.com/seunbayo/full-quiz-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodejs": "0.0.0"
+  }
+}
