@@ -1,12 +1,35 @@
 var express = require("express");
 var app = express();
+// import body parser
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
 
 
-
-//add files from public directory
+//use files from public directory
 app.use(express.static(__dirname + "/public"));
+//use body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+//USE MONGOOSE
+mongoose.connect("mongodb://localhost/yelp_camp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-
+app.post("/highscores", function(req, res){
+  //get high score data
+  var username = req.body.username
+  var highscore = req.params.finalScore
+  var newUser = {username: usernamename, finalScore: highscore };
+  //CREATE A NEW HIGHSCORE AND SAVE TO DB
+  highscore.create(newUser, function(err, newlyCreated){
+    if(err){
+      console.log(err);
+    } else {
+      //redirect to list of highscores already save
+      res.redirect("list of highscore page");
+    }
+  })
+})
 
 
 

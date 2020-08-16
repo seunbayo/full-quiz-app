@@ -1,5 +1,5 @@
 
-#first move al html and js files to public
+#first move all html and js files to public
 #create the express project with packagejson and index.js
 #then bootstrap as normal index.js
 #create route for the highscores packagejson
