@@ -15,6 +15,13 @@ mongoose.connect("mongodb://localhost/yelp_camp", {
   useUnifiedTopology: true,
 });
 
+
+app.get("/end", function(req, res){
+  res.render("end");
+})
+
+
+
 app.post("/highscores", function(req, res){
   //get high score data
   var username = req.body.username
