@@ -9,6 +9,8 @@ var mongoose = require("mongoose");
 app.use(express.static(__dirname + "/public"));
 //use body parser
 app.use(bodyParser.urlencoded({ extended: true }));
+//GET PAGES FROM VIEW
+app.set("view engine", "ejs");
 //USE MONGOOSE
 mongoose.connect("mongodb://localhost/yelp_camp", {
   useNewUrlParser: true,
@@ -18,8 +20,7 @@ mongoose.connect("mongodb://localhost/yelp_camp", {
 
 app.get("/end", function(req, res){
   res.render("end");
-})
-
+});
 
 
 app.post("/highscores", function(req, res){

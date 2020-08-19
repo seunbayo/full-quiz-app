@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game App</title>
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="stylesheet" href="assets/css/game.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/game.css">
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
             <div id="hud">
                 <div id="hud-item">
                     <p id="progress-text" class="hud-prefix">
-                        q   uestion
+                        question
                     </p>
                     <div id="progress-bar">
                         <div id="progressBarFull">
@@ -50,7 +50,18 @@
             <p>Built with love by Seunbayo</p>
         </div>  
     </div>
-    <script src="assets/js/questions.js"></script>
-    <script src="assets/js/hgame.js"></script>
+    <script src="/js/questions.js"></script>
+    <script src="/js/hgame.js"></script>
+    <script>
+        var params = window.location.hash
+            .split('#')
+            .filter(segment => segment)
+            .map(segment => segment.split('='))
+            .reduce((obj, pair) => { obj[pair[0]] = pair[1]; return obj }, {});
+        var body = document.querySelector('body');
+        var script = document.createElement('SCRIPT');
+        script.src = './assets/js/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
+        console.log('check', script.src);
+    </script>
 </body>
 </html>

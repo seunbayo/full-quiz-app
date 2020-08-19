@@ -3,29 +3,25 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progress-text");
 const scoreText = document.getElementById("score");
 
-let body = document.querySelector('body');
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
-let availableQuestions 
+let availableQuestions = questions;
 
 
 // CONSTANT 
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = params.diff === 'hard' ? 30 : 9;
+const MAX_QUESTIONS  = 50;
 
 startGame = () => {
-    body.classList.remove('is-loading');
-    body.classList.add('is-loaded');
-    availableQuestions = questions;
     questionCounter = 0;
     score = 0;
     availableQuestions = [...questions];
-    /* console.log(availableQuestions); */
+    console.log(availableQuestions);
     getNewQuestion();
 };
-window.addEventListener('load', startGame);
+// startGame();
 
 getNewQuestion = () => {
     if(availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
@@ -94,3 +90,6 @@ increamentScore = num => {
     score +=num;
     scoreText.innerText = score;
 };
+
+startGame();
+
