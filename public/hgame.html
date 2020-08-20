@@ -50,8 +50,8 @@
             <p>Built with love by Seunbayo</p>
         </div>  
     </div>
-    <script src="./js/questions.js"></script>
-    <script src="./js/hgame.js"></script>
+    <script src="/js/questions.js"></script>
+    <script src="/js/hgame.js"></script>
     <script>
         var params = window.location.hash
             .split('#')
@@ -60,7 +60,7 @@
             .reduce((obj, pair) => { obj[pair[0]] = pair[1]; return obj }, {});
         var body = document.querySelector('body');
         var script = document.createElement('SCRIPT');
-        script.src =  params.course + '/' + params.level + '/' + params.diff + '/questions.js'
+        script.src = '/public/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
         console.log('check', script.src);
     </script>
 </body>
