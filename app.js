@@ -24,6 +24,13 @@ app.get("/", function(req, res){
 })
 
 
+
+
+
+
+
+
+//Higscore Route
 app.get("/end", function(req, res){
   res.render("end");
 });
