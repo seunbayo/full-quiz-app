@@ -58,7 +58,7 @@
     <script  src="./js/link.js"></script>
     <script>
         var script = document.createElement('SCRIPT');
-        script.src = '/js/course/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
+        script.src = params.course + '/' + params.level + '/' + params.diff + '/questions.js'
         var loader = document.getElementById('loader-script');
         loader.parentNode.insertBefore(script, loader);
     </script>
