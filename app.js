@@ -12,10 +12,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //GET PAGES FROM VIEW
 app.set("view engine", "ejs");
 //USE MONGOOSE
-mongoose.connect("mongodb://localhost/yelp_camp", {
+mongoose.connect("mongodb://localhost/quiz_app", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+
+//Index Route
+app.get("/", function(req, res){
+  res.render("index");
+})
 
 
 app.get("/end", function(req, res){
