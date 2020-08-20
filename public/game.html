@@ -55,13 +55,13 @@
     </div>
     
     <div><div id="loader-script"></div></div>
-    <script  src="/js/link.js"></script>
+    <script  src="./js/link.js"></script>
     <script>
         var script = document.createElement('SCRIPT');
-        script.src = './assets/js/course/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
+        script.src = '/js/course/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
         var loader = document.getElementById('loader-script');
         loader.parentNode.insertBefore(script, loader);
     </script>
-    <script  src="/js/game.js"></script>
+    <script  src="./js/game.js"></script>
 </body>
 </html>

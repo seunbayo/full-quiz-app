@@ -60,9 +60,9 @@
             .reduce((obj, pair) => { obj[pair[0]] = pair[1]; return obj }, {});
         var body = document.querySelector('body');
         var script = document.createElement('SCRIPT');
-        script.src = './assets/js/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
+        script.src = '/js/' + params.course + '/' + params.level + '/' + params.diff + '/questions.js'
         console.log('check', script.src);
     </script>
-    <script src="/js/level/ngame.js"></script>
+    <script src="./js/level/ngame.js"></script>
 </body>
 </html>
