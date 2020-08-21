@@ -63,3 +63,8 @@
     width: 0%;
     background-color: #56a5eb;
 }
+
+
+#loader {
+    display: none;
+}
