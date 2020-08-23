@@ -33,7 +33,7 @@ app.get("/highscores", function(req, res){
 
 app.post("/highscores", function(req, res){
   res.redirect("/highscores");
-})
+});
 
 
 
