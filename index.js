@@ -25,8 +25,32 @@ app.get("/", function(req, res){
   res.render("home");
 });
 
+//LEVEL ROUTE
+app.get("/level", function(req, res){
+  res.render("level")
+});
 
+//COURSE ROUTE
+app.get("/course", function(req, res){
+  res.render("course")
+});
 
+//Difficulty Route
+app.get("/diff", function(req, res){
+  res.render("diff")
+});
+
+//GAME ROUTE
+app.get("/game", function(req, res){
+  res.render("game")
+});
+
+//END ROUTE
+app.get("/end", function(req, res){
+  res.render("end")
+});
+
+//Highscore ROute
 app.get("/highscores", function(req, res){
   res.render("highscores");
 });

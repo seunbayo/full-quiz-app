@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Game App</title>
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/game.css">
-    <link rel="stylesheet" href="/css/high.css">
-</head>
-<body>
-
-    <h2>This is from the header file</h2>
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/game.css" />
+    <link rel="stylesheet" href="/css/high.css" />
+  </head>
+  <body>
+    <header>
+      <!-- <a class="logo" href="/"><img src="images/logo.svg" alt="logo" /></a> -->
+      <nav>
+        <ul class="nav__links">
+          <li><h3><a href="#">Login</a></h3></li>
+          <li><h3><a href="#">Logout</a></h3></li>
+          <li><h3><a href="#">Contact</a></h3></li>
+        </ul>
+      </nav>
+      
+      <a class="cta" href="#">Contact</a>
+      <p class="menu cta">Menu</p>
+    </header>
+    <div id="mobile__menu" class="overlay">
+      <a class="close">&times;</a>
+      <div class="overlay__content">
+        <a href="#">Services</a>
+        <a href="#">Projects</a>
+        <a href="#">About</a>
+      </div>
+    </div>
+  </body>
+</html>
