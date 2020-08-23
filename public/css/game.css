@@ -65,6 +65,6 @@
 }
 
 
-#loader {
+.is-loaded #loader {
     display: none;
 }

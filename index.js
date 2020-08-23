@@ -18,38 +18,21 @@ mongoose.connect("mongodb://localhost/quiz_app", {
 });
 
 
-//Index Route
+//============================================
+//              ROUTES
+//HOMEPAGE ROUTE
 app.get("/", function(req, res){
-  res.render("index");
-})
-
-
-
-
-
-
-
-
-//Higscore Route
-app.get("/end", function(req, res){
-  res.render("end");
+  res.render("home");
 });
 
 
+
+app.get("/highscores", function(req, res){
+  res.render("highscores");
+});
+
 app.post("/highscores", function(req, res){
-  //get high score data
-  var username = req.body.username
-  var highscore = req.params.finalScore
-  var newUser = {username: usernamename, finalScore: highscore };
-  //CREATE A NEW HIGHSCORE AND SAVE TO DB
-  highscore.create(newUser, function(err, newlyCreated){
-    if(err){
-      console.log(err);
-    } else {
-      //redirect to list of highscores already save
-      res.redirect("list of highscore page");
-    }
-  })
+  res.redirect("/highscores");
 })
 
 
