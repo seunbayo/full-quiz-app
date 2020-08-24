@@ -45,15 +45,12 @@ app.get("/game", function(req, res){
   res.render("game")
 });
 
-//END ROUTE
+//HIGHSCORE ROUTE
 app.get("/end", function(req, res){
+  
   res.render("end")
 });
 
-//Highscore ROute
-app.get("/highscores", function(req, res){
-  res.render("highscores");
-});
 
 app.post("/highscores", function(req, res){
   res.redirect("/highscores");

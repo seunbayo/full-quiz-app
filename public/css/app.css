@@ -21,6 +21,7 @@ header {
   
   .logo {
     margin-right: auto;
+    max-width: 5px;
   }
   
   .nav__links {
