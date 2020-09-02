@@ -31,7 +31,7 @@ app.use(
   passport.use(new LocalStrategy(User.authenticate()));
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
-  
+
 //============================================
 //              ROUTES
 //HOMEPAGE ROUTE
@@ -72,6 +72,29 @@ app.post("/highscores", function (req, res) {
     res.redirect("/highscores");
   };
   codeTopostNewHighScore(re.params.username, req.params.score, callback);
+});
+
+// =====================
+//AUTH ROUTES
+// =====================
+
+//SHow the register form
+app.get("/register", function(req, res){
+  res.render("register") 
+})
+
+//Handle SignUp logic
+app.post("/register", function(req, res){
+  var newUser = new User({fullname: req.body.fullname, username: req.body.username, email: req.body.email});
+  User.register(newUser, req.body.password, function(err, user){
+    if(err){
+      console.log(err);
+      return res.render("register");
+    }
+    passport.authenticate("local")(req, res, function(){
+      res.redirect("/level")
+    });
+  })
 });
 
 app.listen(5000, function () {
