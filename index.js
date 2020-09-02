@@ -3,7 +3,9 @@ var app = express();
 // import body parser
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
+var User = require("./models/user");
 
 //use files from public directory
 app.use(express.static(__dirname + "/public"));
@@ -16,50 +18,62 @@ mongoose.connect("mongodb://localhost/quiz_app", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+//PASSPORT CONFIGURATION
+app.use(
+  require("express-session")({
+    secret: "rusty is UGLY",
+    resave: false,
+    saveUninitialized: false,
+  }));
 
-
+  app.use(passport.initialize());
+  app.use(passport.session());
+  passport.use(new LocalStrategy(User.authenticate()));
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
+  
 //============================================
 //              ROUTES
 //HOMEPAGE ROUTE
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
   res.render("home");
 });
 
 //LEVEL ROUTE
-app.get("/level", function(req, res){
-  res.render("level")
+app.get("/level", function (req, res) {
+  res.render("level");
 });
 
 //COURSE ROUTE
-app.get("/course", function(req, res){
-  res.render("course")
+app.get("/course", function (req, res) {
+  res.render("course");
 });
 
 //Difficulty Route
-app.get("/diff", function(req, res){
-  res.render("diff")
+app.get("/diff", function (req, res) {
+  res.render("diff");
 });
 
 //GAME ROUTE
-app.get("/game", function(req, res){
-  res.render("game")
+app.get("/game", function (req, res) {
+  res.render("game");
 });
 
 //HIGHSCORE ROUTE
-app.get("/end", function(req, res){
-  
-  res.render("end")
+app.get("/end", function (req, res) {
+  let callback = (highscores) => {
+    res.render("end", { highscores });
+  };
+  codeToRetrieveHighScoresFromDb(callback);
 });
 
-
-app.post("/highscores", function(req, res){
-  res.redirect("/highscores");
+app.post("/highscores", function (req, res) {
+  let callback = () => {
+    res.redirect("/highscores");
+  };
+  codeTopostNewHighScore(re.params.username, req.params.score, callback);
 });
-
-
-
 
 app.listen(5000, function () {
-    console.log("quiz is up and running");
-  });
-  
+  console.log("quiz is up and running");
+});
