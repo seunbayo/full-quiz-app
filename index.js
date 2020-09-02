@@ -24,13 +24,14 @@ app.use(
     secret: "rusty is UGLY",
     resave: false,
     saveUninitialized: false,
-  }));
+  })
+);
 
-  app.use(passport.initialize());
-  app.use(passport.session());
-  passport.use(new LocalStrategy(User.authenticate()));
-  passport.serializeUser(User.serializeUser());
-  passport.deserializeUser(User.deserializeUser());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //============================================
 //              ROUTES
@@ -40,7 +41,7 @@ app.get("/", function (req, res) {
 });
 
 //LEVEL ROUTE
-app.get("/level", function (req, res) {
+app.get("/level", isLoggedIn, function (req, res) {
   res.render("level");
 });
 
@@ -79,23 +80,55 @@ app.post("/highscores", function (req, res) {
 // =====================
 
 //SHow the register form
-app.get("/register", function(req, res){
-  res.render("register") 
-})
+app.get("/register", function (req, res) {
+  res.render("register");
+});
 
 //Handle SignUp logic
-app.post("/register", function(req, res){
-  var newUser = new User({fullname: req.body.fullname, username: req.body.username, email: req.body.email});
-  User.register(newUser, req.body.password, function(err, user){
-    if(err){
+app.post("/register", function (req, res) {
+  var newUser = new User({
+    fullname: req.body.fullname,
+    username: req.body.username,
+    email: req.body.email,
+  });
+  User.register(newUser, req.body.password, function (err, user) {
+    if (err) {
       console.log(err);
       return res.render("register");
     }
-    passport.authenticate("local")(req, res, function(){
-      res.redirect("/level")
+    passport.authenticate("local")(req, res, function () {
+      res.redirect("/level");
     });
-  })
+  });
 });
+
+//Show login form
+app.get("/login", function (req, res) {
+  res.render("login");
+});
+
+// HAndling login logic
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/level",
+    failureRedirect: "/login",
+  }),
+  function (req, res) {} 
+);
+
+//Logout route
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/home");
+})
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login")
+}
 
 app.listen(5000, function () {
   console.log("quiz is up and running");
