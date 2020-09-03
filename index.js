@@ -41,22 +41,22 @@ app.get("/", function (req, res) {
 });
 
 //LEVEL ROUTE
-app.get("/level", isLoggedIn, function (req, res) {
+app.get("/level",  function (req, res) {
   res.render("level");
 });
 
 //COURSE ROUTE
-app.get("/course", function (req, res) {
+app.get("/course", isLoggedIn, function (req, res) {
   res.render("course");
 });
 
 //Difficulty Route
-app.get("/diff", function (req, res) {
+app.get("/diff", isLoggedIn, function (req, res) {
   res.render("diff");
 });
 
 //GAME ROUTE
-app.get("/game", function (req, res) {
+app.get("/game", isLoggedIn, function (req, res) {
   res.render("game");
 });
 
@@ -78,6 +78,11 @@ app.post("/highscores", function (req, res) {
 // =====================
 //AUTH ROUTES
 // =====================
+
+//Auth PAges
+app.get("/auth", function(req, res){
+  res.render("auth");
+})
 
 //SHow the register form
 app.get("/register", function (req, res) {
