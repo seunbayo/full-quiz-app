@@ -7,6 +7,14 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var User = require("./models/user");
 var highScore = require("./models/highscore");
+// var middleware = require("../middleware/index");
+
+
+//Using routes
+var authRoutes = require("./routes/auth");
+var gameRoutes = require("./routes/game");
+var scoreRoutes = require("./routes/highscores");
+
 
 //use files from public directory
 app.use(express.static(__dirname + "/public"));
@@ -34,107 +42,14 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//============================================
-//              ROUTES
-//HOMEPAGE ROUTE
-app.get("/", function (req, res) {
-  res.render("home");
-});
+      
 
-//LEVEL ROUTE
-app.get("/level",  function (req, res) {
-  res.render("level");
-});
 
-//COURSE ROUTE
-app.get("/course", isLoggedIn, function (req, res) {
-  res.render("course");
-});
+app.use(authRoutes);
+app.use(gameRoutes);
+app.use(scoreRoutes);
 
-//Difficulty Route
-app.get("/diff", isLoggedIn, function (req, res) {
-  res.render("diff");
-});
 
-//GAME ROUTE
-app.get("/game", isLoggedIn, function (req, res) {
-  res.render("game");
-});
-
-//HIGHSCORE ROUTE
-app.get("/end", function (req, res) {
-  let callback = (highscores) => {
-    res.render("end", { highscores });
-  };
-  codeToRetrieveHighScoresFromDb(callback);
-});
-
-app.post("/highscores", function (req, res) {
-  let callback = () => {
-    res.redirect("/highscores");
-  };
-  codeTopostNewHighScore(re.params.username, req.params.score, callback);
-});
-
-// =====================
-//AUTH ROUTES
-// =====================
-
-//Auth PAges
-app.get("/auth", function(req, res){
-  res.render("auth");
-})
-
-//SHow the register form
-app.get("/register", function (req, res) {
-  res.render("register");
-});
-
-//Handle SignUp logic
-app.post("/register", function (req, res) {
-  var newUser = new User({
-    fullname: req.body.fullname,
-    username: req.body.username,
-    email: req.body.email,
-  });
-  User.register(newUser, req.body.password, function (err, user) {
-    if (err) {
-      console.log(err);
-      return res.render("register");
-    }
-    passport.authenticate("local")(req, res, function () {
-      res.redirect("/level");
-    });
-  });
-});
-
-//Show login form
-app.get("/login", function (req, res) {
-  res.render("login");
-});
-
-// HAndling login logic
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/level",
-    failureRedirect: "/login",
-  }),
-  function (req, res) {} 
-);
-
-//Logout route
-app.get("/logout", function(req, res){
-  req.logout();
-  res.redirect("/home");
-})
-
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login")
-}
 
 app.listen(5000, function () {
   console.log("quiz is up and running");
