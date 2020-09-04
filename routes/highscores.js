@@ -5,8 +5,10 @@ var middleware = require("../middleware/index");
 
 
 
+
+
 //HIGHSCORE ROUTE
-router.get("/end", function (req, res) {
+router.get("/end", middleware.isLoggedIn, function (req, res) {
     let callback = (highscores) => {
       res.render("end", { highscores });
     };
@@ -19,6 +21,7 @@ router.get("/end", function (req, res) {
     };
     codeTopostNewHighScore(re.params.username, req.params.score, callback);
   });
+
 
 
 module.exports = router;
