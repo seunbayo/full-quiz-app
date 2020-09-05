@@ -5,6 +5,7 @@ var middleware = require("../middleware/index");
 
 //LEVEL ROUTE
 router.get("/level", function (req, res) {
+  console.log(req.user);
   res.render("level");
 });
 

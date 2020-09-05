@@ -1,35 +1,30 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
-var middleware = require("../middleware/index");
+// var middleware = require("../middleware/index");
 
 
-
-
-//HIGHSCORE ROUTE
-// router.get("/end", middleware.isLoggedIn, function (req, res) {
-//     let callback = (highscores) => {
-//       res.render("end", { highscores });
-//     };
-//     codeToRetrieveHighScoresFromDb(callback);
-//   });
-  
-//   router.post("/highscores", function (req, res) {
-//     let callback = () => {
-//       res.redirect("/highscores");
-//     };
-//     codeTopostNewHighScore(re.params.username, req.params.score, callback);
-//   });
-router.post('/highscores', Middleware(async (req, res, next) => {
+router.post('/highscores', (async (req, res, next) => {
   var { email, score } = req.body;
   //grabbed the email and score values from the request body,used the updateOne method on the UserModel
-  await User.updateOne({ email }, { highScore: score });
-
+  await User.updateOne({ email }, { highScore: final-score-input });
+  res.redirect("end")
 }));
  
-router.get('/end', Middleware(async (req, res, next) => {
+router.get('/highscores', (async (req, res, next) => {
+  console.log();
+  
+  //find the user
+  var user=  await User.findById(req.user._id ) 
+  //compare the score
+  if  (req.query.score > user.highScore) {
+      //update the highscore
+    await User.findByIdAndUpdate(user._id, {highScore: highScore})
+  }
+
   //use the find method on the User model to search for in the database.
-  var users = await User.find({}, 'name highScore -_id').sort({ highScore: -1}).limit(10);
+  var users = await User.find().sort({ highScore: -1}).limit(10);
+  res.render("end", {users})
 }));
 
 

@@ -11,7 +11,7 @@ var User = require("./models/user");
 //Using routes
 var authRoutes = require("./routes/auth");
 var gameRoutes = require("./routes/game");
-// var scoreRoutes = require("./routes/highscores");
+var scoreRoutes = require("./routes/highscores");
 
 
 //use files from public directory
@@ -45,7 +45,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(authRoutes);
 app.use(gameRoutes);
-// app.use(scoreRoutes);
+app.use(scoreRoutes);
 
 
 
