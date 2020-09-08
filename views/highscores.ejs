@@ -4,12 +4,17 @@
 <div class="container">
   <div id="highScores" class="flex-center flex-column">
     <h1 id="finalScore">High Score</h1>
-    <ul id="highScoresList"></ul>
+    <ul id="highScoresList">
+      <% users.forEach(user => { %>
+        <%= user.username %>
+        <%= user.highScore %>
+
+         <% }) %>
+    </ul>
     <a href="/" class="btn">Home</a>
   </div>
 </div>
 
-<!-- <script src="js/high.js"></script> -->
 
 <!-- To include footer.ejs -->
 <%- include ("./partials/footer") %>

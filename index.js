@@ -37,16 +37,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
       
-
-
 app.use(authRoutes);
 app.use(gameRoutes);
 app.use(scoreRoutes);
-
 
 
 app.listen(5000, function () {
