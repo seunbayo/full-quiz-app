@@ -5,13 +5,10 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 
-
-
-
 //HOMEPAGE ROUTE
 router.get("/", function (req, res) {
-    res.render("home");
-  });
+  res.render("home");
+});
 
 //Auth PAges
 router.get("/auth", function (req, res) {
@@ -56,11 +53,15 @@ router.post(
   function (req, res) {}
 );
 
+//Password reset route
+router.get("/pwr", function(req, res){
+  res.render("pwr")
+})
+
 //Logout route
 router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/home");
 });
-
 
 module.exports = router;

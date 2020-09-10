@@ -1,6 +1,5 @@
 var express = require("express");
 var app = express();
-// import body parser
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var passport = require("passport");
@@ -47,6 +46,11 @@ app.use(gameRoutes);
 app.use(scoreRoutes);
 
 
-app.listen(5000, function () {
-  console.log("quiz is up and running");
+var port = 4000;
+if (process.env.PORT) {
+  port = process.env.PORT;
+}
+
+app.listen(port, function () {
+  console.log("quiz App server is running");
 });
