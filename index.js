@@ -46,7 +46,7 @@ app.use(gameRoutes);
 app.use(scoreRoutes);
 
 
-var port = 4000;
+var port = 5000;
 if (process.env.PORT) {
   port = process.env.PORT;
 }

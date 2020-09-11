@@ -17,21 +17,26 @@ router.get("/auth", function (req, res) {
 
 //SHow the register form
 router.get("/register", function (req, res) {
-  res.render("register");
+  res.render("register", {user: new User(), errors: {} } );
 });
 
 //Handle SignUp logic
 router.post("/register", function (req, res) {
-  var newUser = new User({
+  console.log("hello", req.body);
+  var newUser = new User( {
     fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
   });
+
   User.register(newUser, req.body.password, function (err, user) {
+    console.log("hi", newUser, err.email);
+
     if (err) {
       console.log(err);
-      return res.render("register");
+      return res.render("register", {user: newUser, errors: err });
     }
+
     passport.authenticate("local")(req, res, function () {
       res.redirect("/level");
     });
@@ -54,9 +59,9 @@ router.post(
 );
 
 //Password reset route
-router.get("/pwr", function(req, res){
-  res.render("pwr")
-})
+router.get("/pwr", function (req, res) {
+  res.render("pwr");
+});
 
 //Logout route
 router.get("/logout", function (req, res) {
