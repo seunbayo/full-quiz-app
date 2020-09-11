@@ -30,7 +30,7 @@ router.post("/register", function (req, res) {
   });
 
   User.register(newUser, req.body.password, function (err, user) {
-    console.log("hi", newUser, err.email);
+    console.log("hi", newUser, err);
 
     if (err) {
       console.log(err);
