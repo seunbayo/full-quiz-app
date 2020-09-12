@@ -13,11 +13,13 @@ var UserSchema = new mongoose.Schema({
       },
       username : {
         type: String,
-        required: true
+        required: true,
+        minlength: 2,
       },
       highScore : {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0,
       }
     });
 
