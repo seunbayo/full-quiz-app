@@ -30,11 +30,14 @@ router.post("/register", function (req, res) {
   });
 
   User.register(newUser, req.body.password, function (err, user) {
-    console.log("hi", newUser, err);
-
     if (err) {
-      console.log(err);
-      return res.render("register", {user: newUser, errors: err });
+      let errors = err.errors || {}
+      if (err.name === 'UserExistsError') {
+        errors.username = { message: "This username is already registered" }
+      } else if (err.keyPattern && err.keyPattern.email) {
+        errors.email = { message: "This email is already registered" }
+      }
+      return res.render("register", {user: newUser, errors });
     }
 
     passport.authenticate("local")(req, res, function () {

@@ -16,6 +16,10 @@
         placeholder="Full Name"
         value="<%= user.fullname %>"
       />
+      <% if (errors.fullname){ %>
+        <p><%= errors.fullname.message %></p>
+      <% } %>
+
       <label for="username">username</label>
       <input
         required
@@ -25,6 +29,10 @@
         placeholder="username"
         value="<%= user.username %>"
       />
+      <% if (errors.username){ %>
+        <p><%= errors.username.message %></p>
+      <% } %>
+
       <label for="email">email</label>
       <input
         required
@@ -34,11 +42,8 @@
         placeholder="email address"
         value="<%= user.email %>"
       />
-
-      <% if (errors.errors && errors.errors.email){ %>
-
-      <p><%= errors.errors.email.message %></p>
-
+      <% if (errors.email){ %>
+        <p><%= errors.email.message %></p>
       <% } %>
 
       <label for="level">Level</label>
