@@ -17,13 +17,12 @@ router.get("/auth", function (req, res) {
 
 //SHow the register form
 router.get("/register", function (req, res) {
-  res.render("register", {user: new User(), errors: {} } );
+  res.render("register", { user: new User(), errors: {} });
 });
 
 //Handle SignUp logic
 router.post("/register", function (req, res) {
-  console.log("hello", req.body);
-  var newUser = new User( {
+  var newUser = new User({
     fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
@@ -31,13 +30,14 @@ router.post("/register", function (req, res) {
 
   User.register(newUser, req.body.password, function (err, user) {
     if (err) {
-      let errors = err.errors || {}
-      if (err.name === 'UserExistsError') {
-        errors.username = { message: "This username is already registered" }
-      } else if (err.keyPattern && err.keyPattern.email) {
-        errors.email = { message: "This email is already registered" }
+      let errors = err.errors || {};
+
+      if (err.name === "UserExistsError") {
+        errors.username = { message: "This username is already registered" };
+      } else if (err.code === 11000) {
+        errors.email = { message: "This email is already registered" };
       }
-      return res.render("register", {user: newUser, errors });
+      return res.render("register", { user: newUser, errors });
     }
 
     passport.authenticate("local")(req, res, function () {

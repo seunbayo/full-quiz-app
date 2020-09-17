@@ -13,12 +13,23 @@ var gameRoutes = require("./routes/game");
 var scoreRoutes = require("./routes/highscores");
 
 
+
 //use files from public directory
 app.use(express.static(__dirname + "/public"));
 //use body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 //GET PAGES FROM VIEW
 app.set("view engine", "ejs");
+
+// passport.use(new CookieStrategy(
+  // function (token, done) {
+    // User.findByToken({token: token}, function (err, user) {
+      // if(err){return done(err)}
+      // if (!user) {return done(null, false); }
+      // return done(null, user);
+    // });
+  // }
+// ));
 //USE MONGOOSE
 mongoose.connect("mongodb://localhost/quiz_app", {
   useNewUrlParser: true,
